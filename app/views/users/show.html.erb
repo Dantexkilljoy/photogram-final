@@ -1,0 +1,107 @@
+<h1><%= @the_user.username %></h1>
+
+<dl>
+  <dt>Private</dt>
+  <dd><%= @the_user.private %></dd>
+
+  <dt>Followers</dt>
+  <dd>
+    <%= @the_user.received_follow_requests_count %>
+
+
+    <div>
+      <% if @current_user.status == "accepted"  %>
+        <a href="/delete_follow_request/<%= @the_user.id %>">
+          Unfollow
+        </a>
+      <% else %>
+      <div>
+        <form action="/insert_follow_request" method="post">
+          <input type="hidden" name="query_recipient_id" value="<%= @the_user.id %>">
+
+          <button>
+            Follow
+          </button>
+        </form>
+      </div>
+    </div>
+      <% end %>
+  </dd>
+
+  <dt>Following</dt>
+  <dd>9</dd>
+
+</dl>
+
+<nav>
+  <ul>
+    <li>
+      <a href="/users/carol">Profile</a>
+    </li>
+    <li>
+      <a href="/users/carol/liked_photos">Liked photos</a>
+    </li>
+    <li>
+      <a href="/users/carol/feed">Feed</a>
+    </li>
+    <li>
+      <a href="/users/carol/discover">Discover</a>
+    </li>
+  </ul>
+</nav>
+
+<h2>Own photos (1)</h2>
+
+<table border="1">
+  <tr>
+    <th>
+      Image
+    </th>
+
+    <th>
+      Owner
+    </th>
+
+    <th>
+      Caption
+    </th>
+
+    <th>
+      Posted
+    </th>
+
+    <th>
+      Likes
+    </th>
+
+    <th></th>
+  </tr>
+
+  <tr>
+    <td>
+      <img src="https://robohash.org/omnisatqueneque">
+    </td>
+
+    <td>
+      carol
+    </td>
+
+    <td>
+      Summer will end soon enough, and childhood as well.
+    </td>
+
+    <td>
+      over 4 years ago
+    </td>
+
+    <td>
+      5
+    </td>
+
+    <td>
+      <a href="/photos/751">
+        Show details
+      </a>
+    </td>
+  </tr>
+</table>

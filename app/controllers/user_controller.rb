@@ -12,7 +12,7 @@ class UserController < ApplicationController
 
     matching_users = User.where({ :id => the_id })
 
-    @the_user = matching_users.at(0)
+    @the_user = matching_users.first
 
     render({ :template => "users/show.html.erb" })
   end
