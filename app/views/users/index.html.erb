@@ -21,7 +21,11 @@
       </td>
 
       <td>
-          <%= a_user.private %>
+          <% if a_user.private == false %>
+            No
+          <% else %>
+            Yes
+          <% end %>
       </td>
 
       <td>
