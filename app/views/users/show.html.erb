@@ -8,7 +8,10 @@
   <dd>
     <%= @the_user.received_follow_requests_count %>
 
-
+        <% if @current_user.id == @the_user.id %>
+        <h4>Pending follow request</h4>
+        <ul></ul>
+        <% else %>
     <div>
       <% if @current_user.followers == "accepted"  %>
         <a href="/delete_follow_request/<%= @the_user.id %>">
@@ -25,6 +28,7 @@
         </form>
       </div>
     </div>
+        <% end %>
       <% end %>
   </dd>
 
