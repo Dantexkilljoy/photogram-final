@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2023_06_06_011130) do
     t.string "username"
     t.boolean "private"
     t.integer "comments_count"
+    t.integer "likes_count"
     t.integer "sent_follow_requests_count"
     t.integer "received_follow_requests_count"
     t.integer "own_photos_count"
