@@ -10,7 +10,7 @@
 
 
     <div>
-      <% if @current_user.status == "accepted"  %>
+      <% if @current_user.followers == "accepted"  %>
         <a href="/delete_follow_request/<%= @the_user.id %>">
           Unfollow
         </a>
@@ -29,28 +29,28 @@
   </dd>
 
   <dt>Following</dt>
-  <dd>9</dd>
+  <dd><%= @the_user.followers.count %></dd>
 
 </dl>
 
 <nav>
   <ul>
     <li>
-      <a href="/users/carol">Profile</a>
+      <a href="/users/<%= @the_user.username %>">Profile</a>
     </li>
     <li>
-      <a href="/users/carol/liked_photos">Liked photos</a>
+      <a href="/users/<%= @the_user.username %>/liked_photos">Liked photos</a>
     </li>
     <li>
-      <a href="/users/carol/feed">Feed</a>
+      <a href="/users/<%= @the_user.username %>/feed">Feed</a>
     </li>
     <li>
-      <a href="/users/carol/discover">Discover</a>
+      <a href="/users/<%= @the_user.username %>/discover">Discover</a>
     </li>
   </ul>
 </nav>
 
-<h2>Own photos (1)</h2>
+<h2>Own photos (<%= @the_user.own_photos_count %>)</h2>
 
 <table border="1">
   <tr>
@@ -76,32 +76,33 @@
 
     <th></th>
   </tr>
-
+    <% @the_user.own_photos.each do |a_photo|%>
   <tr>
     <td>
-      <img src="https://robohash.org/omnisatqueneque">
+      <img src="<%= a_photo.image %>">
     </td>
 
     <td>
-      carol
+      <%= a_photo.owner_id.username %>
     </td>
 
     <td>
-      Summer will end soon enough, and childhood as well.
+      <%= a_photo.caption %>
     </td>
 
     <td>
-      over 4 years ago
+      <%= time_ago_in_words(a_photo.created_at) %> ago
     </td>
 
     <td>
-      5
+      <%= a_photo.likes_count %>
     </td>
 
     <td>
-      <a href="/photos/751">
+      <a href="/photos/<%= a_photo.id %>">
         Show details
       </a>
     </td>
   </tr>
+  <% end %>
 </table>
