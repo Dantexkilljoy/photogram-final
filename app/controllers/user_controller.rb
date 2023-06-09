@@ -4,7 +4,7 @@ class UserController < ApplicationController
 
     @list_of_users = matching_users.order({ :created_at => :desc })
 
-    render({ :template => "users/index.html.erb" })
+    render({ :template => "users/index.html.erb", alert: "You are not authorized for that. " })
   end
 
   def show
@@ -14,6 +14,14 @@ class UserController < ApplicationController
 
     @the_user = matching_users.first
 
-    render({ :template => "users/show.html.erb" })
+    @the_following = FollowRequest.where({ recipient_id: @the_user.id }).where({ sender_id: @current_user.id }).first
+
+    if @the_user.private == false
+      render({ :template => "users/show.html.erb" })
+    elsif @the_following != nil && @the_following.status == "accepted"
+      render({ :template => "users/show.html.erb" })
+    else
+      redirect_to("/", { notice: "You are not authorized for that." })
+    end
   end
 end
