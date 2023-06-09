@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2023_06_06_011130) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
-    t.integer "commenter_id"
+    t.integer "author_id"
     t.integer "photo_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2023_06_06_011130) do
     t.string "username"
     t.boolean "private"
     t.integer "comments_count"
+    t.integer "likes_count"
     t.integer "sent_follow_requests_count"
     t.integer "received_follow_requests_count"
     t.integer "own_photos_count"
