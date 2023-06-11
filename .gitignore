@@ -42,3 +42,4 @@ package-lock.json
 .vscode/.ltici_apitoken.yml
 vendor/bundle/*
 !vendor/bundle/.keep
+db/development.sqlite3
