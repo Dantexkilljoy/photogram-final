@@ -21,7 +21,7 @@ class UserController < ApplicationController
     elsif @the_following != nil && @the_following.status == "accepted"
       render({ :template => "users/show.html.erb" })
     else
-      redirect_to("/", { notice: "You are not authorized for that." })
+      redirect_to("/", { alert: "You are not authorized for that." })
     end
   end
 end

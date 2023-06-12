@@ -6,29 +6,38 @@
 
   <dt>Followers</dt>
   <dd>
-    <%= @the_user.received_follow_requests_count %>
+    <%= @the_user.followers.count %>
 
-        <% if @current_user.id == @the_user.id %>
+      <% if @current_user.id == @the_user.id %>
         <h4>Pending follow request</h4>
         <ul></ul>
-        <% else %>
-    <div>
-      <% if @current_user.followers == "accepted"  %>
-        <a href="/delete_follow_request/<%= @the_user.id %>">
-          Unfollow
-        </a>
       <% else %>
-      <div>
-        <form action="/insert_follow_request" method="post">
-          <input type="hidden" name="query_recipient_id" value="<%= @the_user.id %>">
 
-          <button>
-            Follow
-          </button>
-        </form>
-      </div>
-    </div>
-        <% end %>
+          <% if FollowRequest.where(recipient_id: @the_user.id).where(sender_id: @current_user.id).first != nil && FollowRequest.where(recipient_id: @the_user.id).where(sender_id: @current_user.id).first.status == "accepted" %>
+            <div>
+              <a href="/delete_follow_request/<%= FollowRequest.where(recipient_id: @the_user.id).where(sender_id: @current_user.id).first.id %>">
+                Unfollow
+              </a>
+            </div>
+          <% else %>
+
+            <form action="/insert_follow_request" method="post">
+              <input type="hidden" name="query_recipient_id" value="<%= @the_user.id %>">
+
+              <input type="hidden" name="query_sender_id" value="<%= @current_user.id %>">
+
+              <% if @the_user.private == true %>
+                  <input type="hidden" name="query_status" value="pending">
+                <% else %>
+                  <input type="hidden" name="query_status" value="accepted">
+                <% end %>
+
+              <button>
+                Follow
+              </button>
+            </form>
+            
+          <% end %>
       <% end %>
   </dd>
 
@@ -54,7 +63,7 @@
   </ul>
 </nav>
 
-<h2>Own photos (<%= @the_user.own_photos_count %>)</h2>
+<h2>Own photos (<%= @the_user.own_photos.count %>)</h2>
 
 <table border="1">
   <tr>

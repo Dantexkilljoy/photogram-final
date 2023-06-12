@@ -67,7 +67,7 @@
           <button>Like</button>
         </form>
       <% else %>
-        <a href="/delete_like/<%= @the_photo.likes.where(fan_id: @current_user.id).first.id %>">Delete like
+        <a href="/delete_like/<%= @the_photo.likes.where(fan_id: @current_user.id).first.id %>">Unlike
         </a>
       <% end %>
       </dd>

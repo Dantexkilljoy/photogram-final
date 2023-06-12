@@ -6,30 +6,32 @@
   </div>
 </div>
 
-<div>
+<% if @current_user != nil %>
   <div>
-    <form action="/insert_photo" method="post" enctype="multipart/form-data">
+    <div>
+      <form action="/insert_photo" method="post" enctype="multipart/form-data">
 
-      <label for="browser_input">Image</label>
+        <label for="browser_input">Image</label>
 
-      <input id="browser_input" type="file" name="query_image" placeholder="Enter a URL for the image...">
+        <input id="browser_input" type="file" name="query_image" placeholder="Enter a URL for the image...">
 
-      <label for="browser_caption">Caption</label>
+        <label for="browser_caption">Caption</label>
 
-      <textarea id="browser_caption" name="query_caption" placeholder="Enter a caption for the photo..."></textarea>
+        <textarea id="browser_caption" name="query_caption" placeholder="Enter a caption for the photo..."></textarea>
 
-      <input type="hidden" name="query_owner_id" value="<%= @current_user.id %>">
+        <input type="hidden" name="query_owner_id" value="<%= @current_user.id %>">
 
-      <input type="hidden"  name="query_likes_count" value="0">
+        <input type="hidden"  name="query_likes_count" value="0">
 
 
-      <input type="hidden" name="query_comments_count" value="0">
+        <input type="hidden" name="query_comments_count" value="0">
 
-      <button>Add photo</button>
+        <button>Add photo</button>
 
-    </form>
+      </form>
+    </div>
   </div>
-</div>
+<% end %>
 
 <div>
   <div>
@@ -80,12 +82,19 @@
         <td>
           <%= a_photo.likes_count %>
         </td>
-
-        <td>
-          <a href="/photos/<%= a_photo.id %>">
-            Show details
-          </a>
-        </td>
+        <% if @current_user != nil %>
+          <td>
+            <a href="/photos/<%= a_photo.id %>">
+              Show details
+            </a>
+          </td>
+        <% else %>
+          <td>
+            <a href="/user_sign_in">
+              Show details
+            </a>
+          </td>
+        <% end %>
       </tr>
       <% end %>
     </table>
