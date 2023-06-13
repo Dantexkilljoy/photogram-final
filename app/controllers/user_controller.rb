@@ -24,4 +24,28 @@ class UserController < ApplicationController
       redirect_to("/", { alert: "You are not authorized for that." })
     end
   end
+
+  def update
+    @user = @current_user
+    @user.username = params.fetch("query_username")
+    @user.private = params.fetch("query_private", false)
+
+    if @user.valid?
+      @user.save
+
+      redirect_to("/users/#{@user.username}", { :notice => "User account updated successfully." })
+    else
+      render({ :template => "/users/#{@user.username}", :alert => @user.errors.full_messages.to_sentence })
+    end
+  end
+
+  def likes
+    the_username = params.fetch("path_id")
+
+    matching_users = User.where({ :username => the_username })
+
+    @the_user = matching_users.first
+
+    render({ :template => "users/likes.html.erb" })
+  end
 end
