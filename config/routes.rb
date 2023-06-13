@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get("/users/:path_id/liked_photos", { controller: "user", action: "likes" })
 
+  get("/users/:path_id/feed", { controller: "user", action: "feed" })
+
   # CREATE
   post("/insert_comment", { :controller => "comments", :action => "create" })
 
