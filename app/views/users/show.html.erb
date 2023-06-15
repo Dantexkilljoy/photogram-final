@@ -78,7 +78,7 @@
   </ul>
 </nav>
 
-<h2>Own photos (<%= @the_user.own_photos.count %>)</h2>
+<h2>Own photos (<%= @the_user.own_photos_count %>)</h2>
 
 <table border="1">
   <tr>
@@ -107,7 +107,7 @@
     <% @the_user.own_photos.each do |a_photo|%>
   <tr>
     <td>
-      <img src="<%= a_photo.image %>">
+      <img src="<%= a_photo.image %>"  class="img-responsive">
     </td>
 
     <td>

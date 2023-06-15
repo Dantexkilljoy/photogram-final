@@ -58,4 +58,14 @@ class UserController < ApplicationController
 
     render({ :template => "users/feed.html.erb" })
   end
+
+  def discover
+    the_username = params.fetch("path_id")
+
+    matching_users = User.where({ :username => the_username })
+
+    @the_user = matching_users.first
+
+    render({ :template => "users/discover.html.erb" })
+  end
 end

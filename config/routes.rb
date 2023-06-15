@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get("/users/:path_id/feed", { controller: "user", action: "feed" })
 
+  get("/users/:path_id/discover", { controller: "user", action: "discover" })
+
   # CREATE
   post("/insert_comment", { :controller => "comments", :action => "create" })
 
