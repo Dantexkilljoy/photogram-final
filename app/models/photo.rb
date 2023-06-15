@@ -3,9 +3,9 @@
 # Table name: photos
 #
 #  id             :integer          not null, primary key
-#  caption        :string
+#  caption        :text
 #  comments_count :integer
-#  image          :text
+#  image          :string
 #  likes_count    :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

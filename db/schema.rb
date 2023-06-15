@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 2023_06_15_184659) do
   end
 
   create_table "photos", force: :cascade do |t|
-    t.string "caption"
-    t.text "image"
+    t.text "caption"
+    t.string "image"
     t.integer "owner_id"
     t.integer "likes_count"
     t.integer "comments_count"
