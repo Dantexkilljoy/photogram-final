@@ -10,7 +10,33 @@
 
       <% if @current_user.id == @the_user.id %>
         <h4>Pending follow request</h4>
-        <ul></ul>
+        <% pending_followers = FollowRequest.where(recipient_id: @the_user.id).where(status: "pending").all %>
+        <ul>
+        <% pending_followers.each do |follower| %>
+          <li>
+            <%= follower.sender.username %>
+            <form action="/modify_follow_request/<%= follower.id %>" method="post">
+                <input name="query_sender_id" value="<%= follower.sender_id %>" type="hidden">
+                <input name="query_recipient_id" value="<%= follower.recipient_id %>" type="hidden">
+                <input name="query_status" value="accepted" type="hidden">
+
+                <button>
+                  Accept
+                </button>
+              </form>
+
+              <form action="/modify_follow_request/<%= follower.id %>" method="post">
+                <input name="query_sender_id" value="<%= follower.sender_id %>" type="hidden">
+                <input name="query_recipient_id" value="<%= follower.recipient_id %>" type="hidden">
+                <input name="query_status" value="accepted" type="hidden">
+              
+                <button>
+                  Reject
+                </button>
+              </form>
+          </li>
+        <% end %>
+        </ul>
       <% else %>
 
           <% if FollowRequest.where(recipient_id: @the_user.id).where(sender_id: @current_user.id).first != nil && FollowRequest.where(recipient_id: @the_user.id).where(sender_id: @current_user.id).first.status == "accepted" %>
