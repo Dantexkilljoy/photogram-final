@@ -30,7 +30,7 @@
 
       <td>
         <% if @current_user != nil %>
-          <% if  FollowRequest.where(sender_id: @current_user.id).where(recipient_id: a_user.id).first == nil %>
+          <% if FollowRequest.where(sender_id: @current_user.id).where(recipient_id: a_user.id).first == nil %>
               <form action="/insert_follow_request" method="post">
                 <input type="hidden" name="query_sender_id" value="<%= @current_user.id %>">
 

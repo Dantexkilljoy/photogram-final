@@ -8,20 +8,26 @@ class UserController < ApplicationController
   end
 
   def show
-    the_username = params.fetch("path_id")
-
-    matching_users = User.where({ :username => the_username })
-
-    @the_user = matching_users.first
-
-    @the_following = FollowRequest.where({ recipient_id: @the_user.id }).where({ sender_id: @current_user.id }).first
-
-    if @the_user.private == false
-      render({ :template => "users/show.html.erb" })
-    elsif @the_following != nil && @the_following.status == "accepted"
-      render({ :template => "users/show.html.erb" })
+    if @current_user == nil
+      redirect_to("/user_sign_in", { alert: "You have to sign in first." })
     else
-      redirect_to("/", { alert: "You are not authorized for that." })
+      the_username = params.fetch("path_id")
+
+      matching_users = User.where({ :username => the_username })
+
+      @the_user = matching_users.first
+
+      @the_following = FollowRequest.where({ recipient_id: @the_user.id }).where({ sender_id: @current_user.id }).first
+
+      if @the_user.private == false
+        render({ :template => "users/show.html.erb" })
+      elsif @current_user.id == @the_user.id
+        render({ :template => "users/show.html.erb" })
+      elsif @the_following != nil && @the_following.status == "accepted"
+        render({ :template => "users/show.html.erb" })
+      else
+        redirect_to("/", { alert: "You are not authorized for that." })
+      end
     end
   end
 

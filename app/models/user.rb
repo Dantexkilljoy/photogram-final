@@ -31,4 +31,5 @@ class User < ApplicationRecord
   has_many(:activity, { through: :following, source: :liked_photos })
   validates(:username, { presence: true })
   validates(:username, { uniqueness: true })
+  validates(:private, { presence: true })
 end
