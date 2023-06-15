@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :password_digest
       t.string :username
-      t.boolean :private
+      t.boolean :private, default: false
       t.integer :comments_count
       t.integer :likes_count
       t.integer :sent_follow_requests_count

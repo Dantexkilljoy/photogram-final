@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_06_011130) do
+ActiveRecord::Schema.define(version: 2023_06_15_184659) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2023_06_06_011130) do
     t.string "email"
     t.string "password_digest"
     t.string "username"
-    t.boolean "private"
+    t.boolean "private", default: false
     t.integer "comments_count"
     t.integer "likes_count"
     t.integer "sent_follow_requests_count"

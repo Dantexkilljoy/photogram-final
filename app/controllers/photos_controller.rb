@@ -1,4 +1,6 @@
 class PhotosController < ApplicationController
+  before_action(:force_user_sign_in, only: [:show, :create, :update, :destroy])
+
   def index
     matching_photos = Photo.all
 
