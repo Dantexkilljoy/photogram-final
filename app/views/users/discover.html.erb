@@ -30,7 +30,7 @@
   </ul>
 </nav>
 
-<h2>Discover (<%= @the_user.discover.count %>)</h2>
+<h2>Discover (<%= @the_user.activity.count %>)</h2>
 
 <table border="1">
   <tr>
@@ -56,7 +56,7 @@
 
     <th></th>
   </tr>
-    <% @the_user.discover.each do |a_photo|%>
+    <% @the_user.activity.each do |a_photo|%>
   <tr>
     <td>
       <img src="<%= a_photo.image %>" class="img-responsive">
